@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/russianbulbasaur/LudoBattleBackend/issues"
   },
-  "homepage": "https://github.com/russianbulbasaur/LudoBattleBackend#readme"
+  "homepage": "https://github.com/russianbulbasaur/LudoBattleBackend#readme",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
 }
