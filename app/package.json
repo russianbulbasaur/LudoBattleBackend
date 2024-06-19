@@ -17,6 +17,9 @@
   },
   "homepage": "https://github.com/russianbulbasaur/LudoBattleBackend#readme",
   "dependencies": {
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "firebase": "^10.12.2",
+    "jsonwebtoken": "^9.0.2",
+    "mysql": "^2.18.1"
   }
 }

@@ -1,0 +1,16 @@
+services:
+    app:
+      build: .
+      ports:
+        - "8000:3000"
+      container_name: ludoapp
+    db:
+      image: "mysql:latest"
+      container_name: ludodb
+      ports:
+        - "3306:3306"
+      environment:
+        - MYSQL_ROOT_PASSWORD=pass
+      volumes:
+        - ./app/Database/Schema/:/docker-entrypoint-initdb.d
+        - ${HOME}/data:/var/lib/mysql
