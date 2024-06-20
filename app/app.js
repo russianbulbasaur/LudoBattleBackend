@@ -1,12 +1,15 @@
-
-const express = require('express')
+import './init.js'
+import express from "express";
+import {authRouter} from "./Routes/authRoutes.js";
+import {gameRouter} from "./Routes/gameRoutes.js";
+import {userRouter} from "./Routes/userRoutes.js";
+import 'dotenv/config'
 const app = express()
-const port = 3000
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+app.use('/auth',authRouter);
+app.use('/game',gameRouter);
+app.use('/user',userRouter);
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+app.listen(process.env.PORT,function () {
+    console.log(`Listening on port ${process.env.PORT}`);
+});

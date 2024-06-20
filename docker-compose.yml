@@ -10,7 +10,7 @@ services:
       ports:
         - "3306:3306"
       environment:
-        - MYSQL_ROOT_PASSWORD=pass
+        - MYSQL_ROOT_PASSWORD=ludo
       volumes:
         - ./app/Database/Schema/:/docker-entrypoint-initdb.d
         - ${HOME}/data:/var/lib/mysql
