@@ -5,7 +5,7 @@ use ludo;
 create table if not exists 
 users(id bigint not null auto_increment,
       name varchar(50) not null,
-      phone varchar(10) not null,
+      phone varchar(10) not null unique,
       balance float not null default 0,
       referral bigint null,
       created_at timestamp default CURRENT_TIMESTAMP,

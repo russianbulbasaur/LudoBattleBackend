@@ -5,19 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a310050b-ae1b-42c9-86ed-f088c0ee622b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Database/pool.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/auth/authController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/.env" beforeDir="false" afterPath="$PROJECT_DIR$/app/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Database/Pool.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Database/Schema/schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/app/Database/Schema/schema.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Database/pool.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/Database/pool.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Routes/authRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/Routes/authRoutes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Routes/gameRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/Routes/gameRoutes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Routes/userRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/Routes/userRoutes.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/auth/AuthController.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/game/gameController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/game/GameController.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/statistics/statistician.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/logs/Logger.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/user/userController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/statistics/Statistician.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/user/UserController.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/auth/authController.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/auth/authController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/init.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/init.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/middleware/jwtAuth.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/middleware/jwtAuth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,7 +46,10 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Node.js.app.js.executor": "Run",
+    "Node.js.authController.js.executor": "Run",
+    "Node.js.authRoutes.js.executor": "Run",
     "Node.js.init.js.executor": "Run",
+    "Node.js.jwtAuth.js.executor": "Run",
     "Node.js.pool.js.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
@@ -56,14 +60,14 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "preferences.pluginManager",
-    "ts.external.directory.path": "/snap/webstorm/384/plugins/javascript-plugin/jsLanguageServicesImpl/external",
+    "ts.external.directory.path": "/snap/webstorm/387/plugins/javascript-plugin/jsLanguageServicesImpl/external",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-WS-241.17890.13" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-WS-241.18034.50" />
       </set>
     </attachedChunks>
   </component>
@@ -78,11 +82,23 @@
       <workItem from="1718519673678" duration="374000" />
       <workItem from="1718665905979" duration="665000" />
       <workItem from="1718902751968" duration="184000" />
-      <workItem from="1718902956027" duration="6306000" />
+      <workItem from="1718902956027" duration="6394000" />
+      <workItem from="1718970279323" duration="4364000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

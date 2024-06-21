@@ -31,4 +31,4 @@ const app = initializeApp(firebaseConfig);
 
 //DB init
 logger.debug("Initializing database");
-new Pool().init();
+Pool.init();

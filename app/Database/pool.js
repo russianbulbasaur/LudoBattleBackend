@@ -3,7 +3,8 @@ import 'dotenv/config'
 import mysql from "mysql2";
 
 export class Pool {
-    init(){
+    static pool;
+    static init(){
         const pool = mysql.createPool({
             connectionLimit: 5,
             host: process.env.DB_HOST,
@@ -18,9 +19,11 @@ export class Pool {
             console.log('Database connected successfully');
             connection.release();
         });
-        this.pool = pool;
+        Pool.pool = pool.promise();
     }
-
+    static async run(query,args){
+        return await Pool.pool.query(query,args);
+    }
 }
 
 

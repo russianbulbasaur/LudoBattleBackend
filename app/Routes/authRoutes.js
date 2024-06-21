@@ -3,7 +3,7 @@ import {AuthController} from "../auth/authController.js";
 export var authRouter = express.Router();
 const controller = new AuthController();
 
-authRouter.get("/verify",function (req,res){
-    res.send("Hi");
-});
+authRouter.get("/verify",controller.verifyOTP);
+
+authRouter.post("/signup",controller.signup);
 
