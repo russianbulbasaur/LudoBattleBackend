@@ -1,4 +1,5 @@
 import { initializeApp } from "firebase/app";
+import {getAuth} from "firebase/auth";
 import 'dotenv/config';
 import {Pool} from "./Database/pool.js";
 import {createLogger} from 'logger';
@@ -28,6 +29,7 @@ const firebaseConfig = {
 
 };
 const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
 //DB init
 logger.debug("Initializing database");

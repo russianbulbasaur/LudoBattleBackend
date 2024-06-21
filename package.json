@@ -1,8 +1,0 @@
-{
-  "dependencies": {
-    "dotenv": "^16.4.5",
-    "logger": "^0.0.1",
-    "mysql2": "^3.10.1",
-    "sqlstring": "^2.3.3"
-  }
-}

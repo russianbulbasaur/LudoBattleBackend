@@ -1,38 +1,52 @@
 import {Pool} from "../Database/pool.js";
-import {escape} from "mysql2";
-
+import {firebaseVerify} from "./firebaseAuth.js";
+import {generateToken} from "../middleware/jwtAuth.js";
 
 export class AuthController{
 
-    generateToken(){
-
-    }
-
     async verifyOTP(req,res){
-        const {otp,id,phone} = req.params;
-        let verified = await firebaseVerify(otp,id);
+        const {id,otp,phone} = req.query;
+        let verified = await firebaseVerify(id,otp);
         if(verified) {
             const [rows, fields] = await Pool.run(
-                `select count(*) as count,name 
-                       from users where phone=?`, [phone]);
-            if(rows[0]['count']===0){
-                res.sendStatus(200).send(`{'message' : 'VERIFIED'}`);
+                `select name,id from users where phone=?`,
+                [phone]);
+            if(rows.length===0){
+                res.status(200).send(`{'message' : 'VERIFIED'}`);
             }else{
-                res.sendStatus(200).send(`{'message' : 'VERIFIED',
-                'name': ${rows[0]['name']},
-                'token': ${this.generateToken()}`);
+                const userID = rows[0]['id'];
+                const name = rows[0]['name'];
+                res.status(200).send(`{'message' : 'VERIFIED',`+
+                `'name': ${rows[0]['name']},`+
+                `'token': ${await generateToken(userID,name,phone)}}`);
             }
         }else{
-            res.sendStatus(401).send("Invalid otp");
-        }
-
-        async function firebaseVerify() {
-            return true;
+            res.status(401).send("Invalid otp");
         }
     }
 
 
-    signup(req,res){
+
+    async signup(req,res){
         const {name,phone,otp,id} = req.body;
+        const verified = await firebaseVerify(id,otp);
+        if(verified){
+            let [rows,fields] = await Pool.run(
+                `select count(*) as count from users where phone=?`,
+                [phone]);
+            if(rows[0]['count']!==0){
+                res.status(400).send(`{'message' : 'User exists'}`);
+                return;
+            }
+            [rows,fields] = await Pool.run(
+                `insert into users(name,phone) values(?,?)`,
+                [name,phone]);
+            const userID = rows['insertId'];
+            res.status(200).send(`{'message' : 'VERIFIED',`+
+                `'name': ${name},`+
+                `'token': ${await generateToken(userID,name,phone)}`);
+        } else{
+            res.status(401).send("Invalid otp");
+        }
     }
 }

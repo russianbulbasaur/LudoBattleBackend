@@ -13,3 +13,7 @@ export function jwtVerify(req,res,next){
         next();
     });
 }
+
+export async function generateToken(id,name,phone){
+    return await jwt.sign({id,name,phone},process.env.JWT_SECRET);
+}
