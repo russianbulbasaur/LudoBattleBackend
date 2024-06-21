@@ -1,17 +1,18 @@
-export class UserController{
-    referralLink(){
+class StatusController{
+
+    openGames() {
         return undefined;
     }
 
-    changeName() {
+    liveGames() {
         return undefined;
     }
 
-    deposit() {
+    getRank() {
         return undefined;
     }
 
-    withdraw() {
+    leaderboard() {
         return undefined;
     }
 }
