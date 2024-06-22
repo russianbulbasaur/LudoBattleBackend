@@ -7,6 +7,7 @@ export class StatusController{
         const [rows, fields] = await connection.query(
             `select * from games where status=?`,
             ['open']);
+        connection.release();
         res.status(200).send(rows);
     }
 
@@ -24,6 +25,7 @@ export class StatusController{
                 ['playing',offset+1,offset+10]
             );
         }
+        connection.release();
         res.status(200).send(rows);
     }
 

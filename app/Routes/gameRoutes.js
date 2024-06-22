@@ -9,6 +9,7 @@ gameRouter.use(jwtVerify);
 gameRouter.post("/create",controller.createGame);
 gameRouter.delete("/delete",controller.deleteGame);
 gameRouter.post("/accept",controller.acceptGame);
+gameRouter.post("/send-code",controller.sendGameCode);
 gameRouter.post("/submit",controller.submitResults);
 gameRouter.get("/open",statusController.openGames);
 gameRouter.get("/live",statusController.liveGames);
