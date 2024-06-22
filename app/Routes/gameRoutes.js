@@ -1,6 +1,7 @@
 import express from "express";
 import {GameController} from "../game/gameController.js";
 import {jwtVerify} from "../middleware/jwtAuth.js";
+import {StatusController} from "../statistics/statusController.js";
 export var gameRouter = express.Router()
 const controller = new GameController();
 const statusController = new StatusController();

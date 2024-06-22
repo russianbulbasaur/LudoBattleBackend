@@ -8,7 +8,8 @@ export class AuthController{
         const {id,otp,phone} = req.query;
         let verified = await firebaseVerify(id,otp);
         if(verified) {
-            const [rows, fields] = await Pool.run(
+            let connection = await Pool.getConnection();
+            const [rows, fields] = await connection.query(
                 `select name,id from users where phone=?`,
                 [phone]);
             if(rows.length===0){
@@ -31,14 +32,15 @@ export class AuthController{
         const {name,phone,otp,id} = req.body;
         const verified = await firebaseVerify(id,otp);
         if(verified){
-            let [rows,fields] = await Pool.run(
+            let connection = await Pool.getConnection();
+            let [rows,fields] = await connection.query(
                 `select count(*) as count from users where phone=?`,
                 [phone]);
             if(rows[0]['count']!==0){
                 res.status(400).send(`{'message' : 'User exists'}`);
                 return;
             }
-            [rows,fields] = await Pool.run(
+            [rows,fields] = await connection.query(
                 `insert into users(name,phone) values(?,?)`,
                 [name,phone]);
             const userID = rows['insertId'];

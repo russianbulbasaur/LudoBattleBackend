@@ -20,8 +20,9 @@ export class Pool {
         });
         Pool.pool = pool.promise();
     }
-    static async run(query,args){
-        return await Pool.pool.query(query,args);
+
+    static async getConnection(){
+        return await Pool.pool.getConnection();
     }
 }
 

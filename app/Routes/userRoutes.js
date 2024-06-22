@@ -1,6 +1,7 @@
 import express from "express";
 import {UserController} from "../user/userController.js";
 import {jwtVerify} from "../middleware/jwtAuth.js";
+import {StatusController} from "../statistics/statusController.js";
 export var userRouter = express.Router()
 const controller = new UserController();
 const statusController = new StatusController();
