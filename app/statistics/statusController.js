@@ -1,4 +1,5 @@
 import {Pool} from "../Database/pool.js";
+import {redisClient} from "../redis/redisController.js";
 
 export class StatusController{
 
@@ -29,11 +30,25 @@ export class StatusController{
         res.status(200).send(rows);
     }
 
-    getRank() {
-        return undefined;
+    async getRank(req,res) {
+        const {user} = req;
+        try {
+            const rank = await
+                redisClient.sendCommand(['zscore','leaderboard',user.id.toString()]);
+            res.status(200).send(`{'rank':${rank}}`);
+        }catch (e){
+            res.status(400).send(e);
+        }
     }
 
-    leaderboard() {
-        return undefined;
+    async leaderboard(req,res) {
+        try{
+            const board = await
+                redisClient.sendCommand(
+                    ['zrange','leaderboard','0','10','withscores','rev']);
+            res.status(200).send(`{'leaderboard':${board}`);
+        }catch (e){
+            res.status(400).send(e);
+        }
     }
 }
