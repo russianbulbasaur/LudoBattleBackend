@@ -9,6 +9,7 @@ userRouter.use(jwtVerify);
 userRouter.post("/changename",controller.changeName);
 userRouter.post("/deposit",controller.deposit);
 userRouter.post("/withdraw",controller.withdraw);
+userRouter.get("/history",controller.getHistory);
 userRouter.get("/referral",controller.referralLink);
 userRouter.get("/rank",statusController.getRank);
 userRouter.get("/leaderboard",statusController.leaderboard);
