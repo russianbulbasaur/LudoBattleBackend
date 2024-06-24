@@ -18,7 +18,7 @@ export class AuthController{
         let connection = await Pool.getConnection();
         try{
             const [rows, fields] = await connection.query(
-                `select name,id from users where phone=?`,
+                `select name,id,balance from users where phone=?`,
                 [phone]);
             if(rows.length===0){
                 res.status(200).send(`{'message' : 'VERIFIED'}`);
@@ -28,6 +28,8 @@ export class AuthController{
             const name = rows[0]['name'];
             res.status(200).send(`{'message' : 'VERIFIED',`+
                 `'name': ${rows[0]['name']},`+
+                `'balance':${rows[0]['balance']},`+
+                `'id':${rows[0]['id']},`+
                 `'token': ${await generateToken(userID,name,phone)}}`);
         }catch (e){
             res.status(400).send(e);

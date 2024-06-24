@@ -12,6 +12,6 @@ app.use('/auth',authRouter);
 app.use('/game',gameRouter);
 app.use('/user',userRouter);
 
-app.listen(process.env.PORT,function () {
+app.listen(process.env.PORT,"::",function () {
     console.log(`Listening on port ${process.env.PORT}`);
 });
