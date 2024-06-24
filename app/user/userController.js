@@ -16,17 +16,17 @@ export class UserController{
         let params = [];
         if(!offset) offset = 0;
         switch(tab){
-            case 'games':
+            case "games":
                 query = `select * from games where host_id=? or player_id=? `+
                     `order by created_at desc offset ? limit 10`;
                 params = [user.id,user.id,offset];
                 break;
-            case 'transactions':
+            case "transactions":
                 query = `select * from transactions where user_id=? order by created_at desc`+
                     ` offset ? limit 10`;
                 params = [user.id,offset];
                 break;
-            case 'referrals':
+            case "referrals":
                 break;
         }
         let connection = Pool.getConnection();

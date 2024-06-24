@@ -21,16 +21,16 @@ export class AuthController{
                 `select name,id,balance from users where phone=?`,
                 [phone]);
             if(rows.length===0){
-                res.status(200).send(`{'message' : 'VERIFIED'}`);
+                res.status(200).send(`{"message" : "VERIFIED"}`);
                 return;
             }
-            const userID = rows[0]['id'];
-            const name = rows[0]['name'];
-            res.status(200).send(`{'message' : 'VERIFIED',`+
-                `'name': ${rows[0]['name']},`+
-                `'balance':${rows[0]['balance']},`+
-                `'id':${rows[0]['id']},`+
-                `'token': ${await generateToken(userID,name,phone)}}`);
+            const userID = rows[0]["id"];
+            const name = rows[0]["name"];
+            res.status(200).send(`{"message" : "VERIFIED",`+
+                `"name": "${rows[0]["name"]}",`+
+                `"balance":${rows[0]["balance"]},`+
+                `"id":${rows[0]["id"]},`+
+                `"token": "${await generateToken(userID,name,phone)}"}`);
         }catch (e){
             res.status(400).send(e);
         }
@@ -58,18 +58,18 @@ export class AuthController{
             let [rows,fields] = await connection.query(
                 `select count(*) as count from users where phone=? for update`,
                 [phone]);
-            if(rows[0]['count']!==0){
-                res.status(400).send(`{'message' : 'User exists'}`);
+            if(rows[0]["count"]!==0){
+                res.status(400).send(`{"message" : "User exists"}`);
                 return;
             }
             [rows,fields] = await connection.query(
                 `insert into users(name,phone) values(?,?)`,
                 [name,phone]);
             await connection.commit();
-            const userID = rows['insertId'];
-            res.status(200).send(`{'message' : 'VERIFIED',`+
-                `'name': ${name},`+
-                `'token': ${await generateToken(userID,name,phone)}}`);
+            const userID = rows["insertId"];
+            res.status(200).send(`{"message" : "VERIFIED",`+
+                `"name": "${name}",`+
+                `"token": "${await generateToken(userID,name,phone)}"}`);
         }catch(e){
             await connection.rollback();
             res.status(400).send(e);

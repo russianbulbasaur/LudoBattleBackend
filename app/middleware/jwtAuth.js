@@ -1,6 +1,6 @@
-import jwt from 'jsonwebtoken';
+import jwt from "jsonwebtoken";
 const {verify} = jwt;
-import 'dotenv/config.js'
+import "dotenv/config.js"
 export function jwtVerify(req,res,next){
     const token = req.headers.authorization;
     if(!token){
@@ -19,5 +19,5 @@ export function jwtVerify(req,res,next){
 }
 
 export async function generateToken(id,name,phone){
-    return await jwt.sign({id,name,phone},process.env.JWT_SECRET);
+    return (await jwt.sign({id,name,phone},process.env.JWT_SECRET)).toString();
 }

@@ -7,7 +7,7 @@ export class StatusController{
         let connection = await Pool.getConnection();
         const [rows, fields] = await connection.query(
             `select * from games where status=?`,
-            ['open']);
+            ["open"]);
         connection.release();
         res.status(200).send(rows);
     }
@@ -19,11 +19,11 @@ export class StatusController{
         if(!offset) {
             [rows, fields] = await connection.query(
                 `select * from games where status=? limit 10`,
-                ['playing']);
+                ["playing"]);
         }else{
             [rows,fields] = await connection.query(
                 `select * from games where status=? and id between ? and ?`,
-                ['playing',offset+1,offset+10]
+                ["playing",offset+1,offset+10]
             );
         }
         connection.release();
@@ -34,8 +34,8 @@ export class StatusController{
         const {user} = req;
         try {
             const rank = await
-                redisClient.sendCommand(['zscore','leaderboard',user.id.toString()]);
-            res.status(200).send(`{'rank':${rank}}`);
+                redisClient.sendCommand(["zscore","leaderboard",user.id.toString()]);
+            res.status(200).send(`{"rank":${rank}}`);
         }catch (e){
             res.status(400).send(e);
         }
@@ -45,8 +45,8 @@ export class StatusController{
         try{
             const board = await
                 redisClient.sendCommand(
-                    ['zrange','leaderboard','0','10','withscores','rev']);
-            res.status(200).send(`{'leaderboard':${board}`);
+                    ["zrange","leaderboard","0","10","withscores","rev"]);
+            res.status(200).send(`{"leaderboard":${board}`);
         }catch (e){
             res.status(400).send(e);
         }

@@ -12,6 +12,6 @@ gameRouter.post("/create",controller.createGame);
 gameRouter.delete("/delete",controller.deleteGame);
 gameRouter.post("/accept",controller.acceptGame);
 gameRouter.post("/send-code",controller.sendGameCode);
-gameRouter.post("/submit",multerEngine.single('screenshot'),controller.submitResults);
+gameRouter.post("/submit",multerEngine.single("screenshot"),controller.submitResults);
 gameRouter.get("/open",statusController.openGames);
 gameRouter.get("/live",statusController.liveGames);

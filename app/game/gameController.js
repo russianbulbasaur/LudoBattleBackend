@@ -16,10 +16,10 @@ export class GameController{
             let [rows,fields] = await
                 connection.query(`select balance from users where id=? for update`,
                     [user.id]);
-            const userBalance = rows[0]['balance'];
+            const userBalance = rows[0]["balance"];
             if(userBalance<amount){
                 await connection.commit();
-                res.status(404).send(`{'message':'Not enough balance'}`);
+                res.status(404).send(`{"message":"Not enough balance"}`);
                 return;
             }
             await connection.query(`update users set balance=? where id=?`,
@@ -27,10 +27,10 @@ export class GameController{
             [rows,fields] =
                 await connection.query(`insert into `+
                     `games(host_id,amount,winning_amount,status)`+
-                    `values(?,?,?,?)`,[user.id,amount,amount,'open']);
+                    `values(?,?,?,?)`,[user.id,amount,amount,"open"]);
             await connection.commit();
-            res.status(200).send(`{'message' : 'Game created',`+
-                `'game_id':${rows['insertId']}}`);
+            res.status(200).send(`{"message" : "Game created",`+
+                `"game_id":${rows["insertId"]}}`);
         }catch (e) {
             await connection.rollback();
             res.status(400).send(e);
@@ -52,12 +52,12 @@ export class GameController{
             let [rows,fields] = await connection.query(
                 `select * from games where id=? for update`,[game_id]
             );
-            if(rows[0]['host_id']!==user.id){
-                res.status(400).send(`{'message':'User does not own the game'}`);
+            if(rows[0]["host_id"]!==user.id){
+                res.status(400).send(`{"message":"User does not own the game"}`);
                 return;
             }
-            if(rows[0]['status']!=='open') {
-                res.status(400).send('The game is not open');
+            if(rows[0]["status"]!=="open") {
+                res.status(400).send("The game is not open");
                 return;
             }
             await connection.query(`delete from games where id=?`,[game_id]);
@@ -85,15 +85,15 @@ export class GameController{
             let [rows,fields] = await connection.query(
                 `select * from games where id=? for update`,[game_id]
             );
-            const gameAmount = rows[0]['amount'];
-            if(rows[0]['status']!=='open'){
+            const gameAmount = rows[0]["amount"];
+            if(rows[0]["status"]!=="open"){
                 res.status(400).send("Game not open");
                 return;
             }
             [rows,fields] = await connection.query(
                 `select balance from users where id=? for update`,[user.id]
             );
-            const userBalance = rows[0]['balance']
+            const userBalance = rows[0]["balance"]
             if(userBalance<gameAmount){
                 res.status(400).send("Not enough balance");
                 return;
@@ -103,7 +103,7 @@ export class GameController{
                 [userBalance-gameAmount,user.id]);
             await connection.query(
                 `update games set status=?,player_id=? where id=?`,
-                ['waiting',user.id,game_id]
+                ["waiting",user.id,game_id]
             );
             await connection.commit();
             res.status(200).send("Accepted game");
@@ -125,7 +125,7 @@ export class GameController{
         try{
             await connection.query(
                 `update games set code=?,status=? where id=?`,
-                [code,'playing',game_id]
+                [code,"playing",game_id]
             );
             res.status(200).send("Code updated");
         }catch(e){
@@ -151,11 +151,11 @@ export class GameController{
                 `select host_id,player_id,attachments,winner from games where id=? for update`,
                 [game_id]
             );
-            if(rows[0]['host_id']!==user.id && rows[0]['player_id']!==user.id){
+            if(rows[0]["host_id"]!==user.id && rows[0]["player_id"]!==user.id){
                 res.status(400).send("This user is not a host or a player");
                 return;
             }
-            let winner = rows[0]['winner'];
+            let winner = rows[0]["winner"];
             if(result==="win") {
                 if (winner && winner !== user.id) {
                     res.status(400).send("same");
@@ -163,11 +163,11 @@ export class GameController{
                 }
                 winner = user.id;
             }
-            const attachments = rows[0]['attachments'];
+            const attachments = rows[0]["attachments"];
             attachments[user.id] = uploadedFilename;
             await connection.query(
                 `update games set attachments=?,status=?,winner=? where id=?`,
-                [attachments,'ended',winner,game_id]
+                [attachments,"ended",winner,game_id]
             );
             await connection.commit();
         }catch (e){

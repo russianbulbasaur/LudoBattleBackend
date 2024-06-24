@@ -1,4 +1,4 @@
-import 'dotenv/config'
+import "dotenv/config"
 import mysql from "mysql2";
 
 export class Pool {
@@ -15,7 +15,7 @@ export class Pool {
         pool.getConnection((err,connection)=> {
             if(err)
                 throw err;
-            console.log('Database connected successfully');
+            console.log("Database connected successfully");
             connection.release();
         });
         Pool.pool = pool.promise();
