@@ -5,6 +5,23 @@ export class UserController{
         return undefined;
     }
 
+    async getBalance(req,res){
+        const {user} = req;
+        let connection = await Pool.getConnection();
+        try{
+            const [rows,fields] = await connection.query(
+                `select balance,name from users where id=?`,
+                [user.id]
+            );
+            res.status(200).send(`{"balance":${rows[0]['balance']},`+
+                                  `"name":${rows[0]['name']}}`);
+        }catch (e){
+            res.status(400).send(e);
+        } finally {
+            connection.release();
+        }
+    }
+
     async getHistory(req,res){
         const {user} = req;
         let {tab,offset} = req.params;
