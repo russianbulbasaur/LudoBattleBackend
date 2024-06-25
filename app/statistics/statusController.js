@@ -6,7 +6,8 @@ export class StatusController{
     async openGames(req,res) {
         let connection = await Pool.getConnection();
         const [rows, fields] = await connection.query(
-            `select * from games where status=?`,
+            `select games.*,users.name as host_name from games inner join users on `+
+            `users.id=games.host_id where status=?`,
             ["open"]);
         connection.release();
         res.status(200).send(rows);

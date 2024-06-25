@@ -14,3 +14,6 @@ services:
       volumes:
         - ./app/Database/Schema/:/docker-entrypoint-initdb.d
         - ${HOME}/data:/var/lib/mysql
+    redis:
+      image: "redis:latest"
+      container_name: ludoredis
