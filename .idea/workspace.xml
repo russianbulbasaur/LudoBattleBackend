@@ -7,8 +7,8 @@
     <list default="true" id="a310050b-ae1b-42c9-86ed-f088c0ee622b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/.env" beforeDir="false" afterPath="$PROJECT_DIR$/app/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Routes/userRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/Routes/userRoutes.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/statistics/statusController.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/statistics/statusController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,7 +83,8 @@
       <workItem from="1719249111271" duration="705000" />
       <workItem from="1719250738375" duration="303000" />
       <workItem from="1719251728522" duration="2571000" />
-      <workItem from="1719289580568" duration="3061000" />
+      <workItem from="1719289580568" duration="3755000" />
+      <workItem from="1719308248113" duration="2638000" />
     </task>
     <servers />
   </component>

@@ -19,7 +19,10 @@ export class StatusController{
         let [rows,fields] = [];
         if(!offset) {
             [rows, fields] = await connection.query(
-                `select * from games where status=? limit 10`,
+                `select games.amount as amount,u1.name as player1,u2.name as player2 from games `+
+                `inner join users u1 on u1.id=games.host_id `+
+                `inner join users u2 on u2.id=games.player_id `+
+                `where status=? limit 10`,
                 ["playing"]);
         }else{
             [rows,fields] = await connection.query(

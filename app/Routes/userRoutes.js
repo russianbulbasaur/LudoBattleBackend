@@ -6,7 +6,7 @@ export var userRouter = express.Router()
 const controller = new UserController();
 const statusController = new StatusController();
 userRouter.use(jwtVerify);
-userRouter.post("/changename",controller.changeName);
+userRouter.post("/change-name",controller.changeName);
 userRouter.get("/balance",controller.getBalance);
 userRouter.post("/deposit",controller.deposit);
 userRouter.post("/withdraw",controller.withdraw);
