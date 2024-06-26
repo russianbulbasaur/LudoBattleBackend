@@ -1,6 +1,6 @@
 import express from "express";
 import {jwtVerify} from "../middleware/jwtAuth.js";
-import {PaymentController} from "../payment/payment_controller.js";
+import {PaymentController} from "../payment/paymentController.js";
 export const paymentRouter = express.Router();
 const paymentController = new PaymentController();
 

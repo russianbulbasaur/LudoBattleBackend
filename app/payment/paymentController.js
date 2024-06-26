@@ -35,7 +35,7 @@ export class PaymentController {
             res.status(400).send("Signature,payment_id,txn_id required");
             return;
         }
-        const signatureVerified = await this.verifySignature(order_id,payment_id,signature);
+        const signatureVerified = await verifySignature(order_id,payment_id,signature);
         if(!signatureVerified){
             res.status(400).send("Invalid transaction");
             return;
@@ -68,11 +68,11 @@ export class PaymentController {
         }finally {
             connection.release();
         }
-    }
 
-    async verifySignature(order_id,payment_id,signature){
-        return await validatePaymentVerification({"order_id": order_id, "payment_id": payment_id }, signature,
-            process.env.RAZORPAY_SECRET);
+        async function verifySignature(order_id,payment_id,signature){
+            return await validatePaymentVerification({"order_id": order_id, "payment_id": payment_id }, signature,
+                process.env.RAZORPAY_SECRET);
+        }
     }
 
     async createWithdrawRequest(req,res){

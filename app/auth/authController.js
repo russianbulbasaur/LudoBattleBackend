@@ -28,7 +28,7 @@ export class AuthController{
             const name = rows[0]["name"];
             res.status(200).send(JSON.stringify({"message":"VERIFIED",
             "name":rows[0]["name"].toString(),
-            "balance":rows[0]["balance"],
+            "balance":rows[0]["balance"],"phone":phone,
             "id":rows[0]["id"],
             "token":(await generateToken(userID,name,phone)).toString()}));
         }catch (e){
@@ -59,7 +59,7 @@ export class AuthController{
                 `select count(*) as count from users where phone=? for update`,
                 [phone]);
             if(rows[0]["count"]!==0){
-                res.status(400).send(`{"message" : "User exists"}`);
+                res.status(400).send(JSON.stringify({"message":"User exists"}));
                 return;
             }
             [rows,fields] = await connection.query(
@@ -68,7 +68,7 @@ export class AuthController{
             await connection.commit();
             const userID = rows["insertId"];
             res.status(200).send(JSON.stringify({"message":"VERIFIED",
-            "name":name.toString(),
+            "name":name.toString(),"balance":0, "id":userID.toString(), "phone":phone,
             "token":(await generateToken(userID,name,phone)).toString()}));
         }catch(e){
             await connection.rollback();
