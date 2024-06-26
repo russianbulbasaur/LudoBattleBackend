@@ -35,12 +35,12 @@ export class UserController{
         switch(tab){
             case "games":
                 query = `select * from games where host_id=? or player_id=? `+
-                    `order by created_at desc offset ? limit 10`;
+                    `order by created_at desc offset ? limit 20`;
                 params = [user.id,user.id,offset];
                 break;
             case "transactions":
                 query = `select * from transactions where user_id=? order by created_at desc`+
-                    ` offset ? limit 10`;
+                    ` offset ? limit 20`;
                 params = [user.id,offset];
                 break;
             case "referrals":
