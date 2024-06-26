@@ -13,8 +13,8 @@ export class UserController{
                 `select balance,name from users where id=?`,
                 [user.id]
             );
-            res.status(200).send(`{"balance":${rows[0]['balance']},`+
-                                  `"name":${rows[0]['name']}}`);
+            res.status(200).send(JSON.stringify({"balance":rows[0]["balance"],
+            "name":rows[0]["name"]}));
         }catch (e){
             res.status(400).send(e);
         } finally {
@@ -74,11 +74,4 @@ export class UserController{
         res.status(200).send("Updated successfully");
     }
 
-    deposit() {
-        return undefined;
-    }
-
-    withdraw() {
-        return undefined;
-    }
 }

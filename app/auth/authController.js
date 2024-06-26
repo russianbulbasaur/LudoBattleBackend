@@ -21,16 +21,16 @@ export class AuthController{
                 `select name,id,balance from users where phone=?`,
                 [phone]);
             if(rows.length===0){
-                res.status(200).send(`{"message" : "VERIFIED"}`);
+                res.status(200).send(JSON.stringify({"message":"VERIFIED"}));
                 return;
             }
             const userID = rows[0]["id"];
             const name = rows[0]["name"];
-            res.status(200).send(`{"message" : "VERIFIED",`+
-                `"name": "${rows[0]["name"]}",`+
-                `"balance":${rows[0]["balance"]},`+
-                `"id":${rows[0]["id"]},`+
-                `"token": "${await generateToken(userID,name,phone)}"}`);
+            res.status(200).send(JSON.stringify({"message":"VERIFIED",
+            "name":rows[0]["name"].toString(),
+            "balance":rows[0]["balance"],
+            "id":rows[0]["id"],
+            "token":(await generateToken(userID,name,phone)).toString()}));
         }catch (e){
             res.status(400).send(e);
         }
@@ -67,9 +67,9 @@ export class AuthController{
                 [name,phone]);
             await connection.commit();
             const userID = rows["insertId"];
-            res.status(200).send(`{"message" : "VERIFIED",`+
-                `"name": "${name}",`+
-                `"token": "${await generateToken(userID,name,phone)}"}`);
+            res.status(200).send(JSON.stringify({"message":"VERIFIED",
+            "name":name.toString(),
+            "token":(await generateToken(userID,name,phone)).toString()}));
         }catch(e){
             await connection.rollback();
             res.status(400).send(e);

@@ -39,7 +39,7 @@ export class StatusController{
         try {
             const rank = await
                 redisClient.sendCommand(["zscore","leaderboard",user.id.toString()]);
-            res.status(200).send(`{"rank":${rank}}`);
+            res.status(200).send(JSON.stringify({"rank":rank}));
         }catch (e){
             res.status(400).send(e);
         }
@@ -50,7 +50,7 @@ export class StatusController{
             const board = await
                 redisClient.sendCommand(
                     ["zrange","leaderboard","0","10","withscores","rev"]);
-            res.status(200).send(`{"leaderboard":${board}`);
+            res.status(200).send(JSON.stringify(board));
         }catch (e){
             res.status(400).send(e);
         }

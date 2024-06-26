@@ -19,7 +19,7 @@ export class GameController{
             const userBalance = rows[0]["balance"];
             if(userBalance<amount){
                 await connection.commit();
-                res.status(404).send(`{"message":"Not enough balance"}`);
+                res.status(404).send(JSON.stringify({"message":"Not enough balance"}));
                 return;
             }
             await connection.query(`update users set balance=? where id=?`,
@@ -29,8 +29,8 @@ export class GameController{
                     `games(host_id,amount,winning_amount,status)`+
                     `values(?,?,?,?)`,[user.id,amount,amount,"open"]);
             await connection.commit();
-            res.status(200).send(`{"message" : "Game created",`+
-                `"game_id":${rows["insertId"]}}`);
+            res.status(200).send(JSON.stringify({"message":"Game created",
+            "game_id":rows["insertId"]}));
         }catch (e) {
             await connection.rollback();
             res.status(400).send(e);
