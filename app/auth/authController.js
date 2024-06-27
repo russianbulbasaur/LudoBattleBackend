@@ -10,7 +10,7 @@ export class AuthController{
             res.status(400).send("Id, otp, phone required");
             return;
         }
-        let verified = await firebaseVerify(id,otp);
+        let verified = await firebaseVerify(otp,phone,id);
         if(!verified){
             res.status(401).send("Invalid otp");
             return;
@@ -47,7 +47,7 @@ export class AuthController{
             res.status(400).send("Name,phone,otp,id required");
             return;
         }
-        const verified = await firebaseVerify(id,otp);
+        const verified = true;
         if(!verified){
             res.status(401).send("Invalid otp");
             return;

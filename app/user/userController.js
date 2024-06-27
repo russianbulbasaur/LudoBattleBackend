@@ -24,7 +24,7 @@ export class UserController{
 
     async getHistory(req,res){
         const {user} = req;
-        let {tab,offset} = req.params;
+        let {tab,offset} = req.query;
         if(!tab){
             res.status(400).send("Tab required");
             return;
@@ -35,24 +35,24 @@ export class UserController{
         switch(tab){
             case "games":
                 query = `select * from games where host_id=? or player_id=? `+
-                    `order by created_at desc offset ? limit 20`;
+                    `order by created_at desc limit 20 offset ?`;
                 params = [user.id,user.id,offset];
                 break;
             case "transactions":
-                query = `select * from transactions where user_id=? order by created_at desc`+
-                    ` offset ? limit 20`;
+                query = `select id,date(created_at) as date,amount from transactions where user_id=? order by created_at desc`+
+                    ` limit 20 offset ?`;
                 params = [user.id,offset];
                 break;
             case "referrals":
                 break;
         }
-        let connection = Pool.getConnection();
+        let connection = await Pool.getConnection();
         try{
             const [rows,fields] = await connection.query(
                 query,
                 params
             );
-            res.status(400).send(rows);
+            res.status(200).send(rows);
         }catch (e){
             res.status(400).send(e);
         }finally {
