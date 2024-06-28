@@ -163,10 +163,10 @@ export class GameController{
         const connection = await Pool.getConnection();
         try{
             const [rows,fields] = await connection.query(
-                `select *,u1.name as hostName,u2.name as playerName from games `+
+                `select games.*,u1.name as hostName,u2.name as playerName from games `+
                 `inner join users u1 on games.host_id=u1.id `+
-                `inner join users u2 on game.player_id=u2.id `+
-                `where id=?`,
+                `left join users u2 on games.player_id=u2.id `+
+                `where games.id=?`,
                 [gameId]
             );
             res.status(200).send(JSON.stringify(rows[0]));

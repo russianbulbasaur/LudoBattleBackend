@@ -7,7 +7,7 @@ export class StatusController{
         const {user} = req;
         let connection = await Pool.getConnection();
         const [rows, fields] = await connection.query(
-            `select games.*,users.name as host_name from games inner join users on `+
+            `select games.*,users.name as hostName from games inner join users on `+
             `users.id=games.host_id where status=? or (host_id=? and status=?)`,
             ["open",user.id,"waiting"]);
         connection.release();
@@ -20,7 +20,7 @@ export class StatusController{
         let [rows,fields] = [];
         if(!offset) {
             [rows, fields] = await connection.query(
-                `select games.amount as amount,u1.name as hostName,u2.name as playerName from games `+
+                `select games.amount as amount,u1.name as player1,u2.name as player2 from games `+
                 `inner join users u1 on u1.id=games.host_id `+
                 `inner join users u2 on u2.id=games.player_id `+
                 `where status=? limit 10`,
