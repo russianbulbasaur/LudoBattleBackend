@@ -28,6 +28,7 @@ export class GameController{
             const gameCount = rows[0]["games"];
             if(gameCount>0){
                 res.status(400).send(JSON.stringify({"message":"A game already exists"}));
+                return;
             }
             await connection.query(`update users set balance=? where id=?`,
                 [userBalance-amount,user.id]);
@@ -59,6 +60,7 @@ export class GameController{
             let [rows,fields] = await connection.query(
                 `select * from games where id=? for update`,[game_id]
             );
+            const amount = rows[0]["amount"];
             if(rows[0]["host_id"]!==user.id){
                 res.status(400).send(`{"message":"User does not own the game"}`);
                 return;
@@ -67,7 +69,16 @@ export class GameController{
                 res.status(400).send("The game is not open");
                 return;
             }
+            [rows,fields] = await connection.query(
+                `select balance from users where id=? for update`,
+                [user.id]
+            );
+            const currBalance = rows[0]["balance"];
             await connection.query(`delete from games where id=?`,[game_id]);
+            await connection.query(
+                `update users set balance=? where id=?`,
+                [currBalance+amount,user.id]
+            );
             await connection.commit();
             res.status(200).send("Game deleted");
         }catch (e){
@@ -136,6 +147,30 @@ export class GameController{
             );
             res.status(200).send("Code updated");
         }catch(e){
+            res.status(400).send(e);
+        }finally {
+            connection.release();
+        }
+    }
+
+    async getGameStatus(req,res){
+        const {user} = req;
+        const {gameId} = req.query;
+        if(!gameId){
+            res.status(400).send(JSON.stringify({"message":"Send game id"}));
+            return;
+        }
+        const connection = await Pool.getConnection();
+        try{
+            const [rows,fields] = await connection.query(
+                `select *,u1.name as hostName,u2.name as playerName from games `+
+                `inner join users u1 on games.host_id=u1.id `+
+                `inner join users u2 on game.player_id=u2.id `+
+                `where id=?`,
+                [gameId]
+            );
+            res.status(200).send(JSON.stringify(rows[0]));
+        }catch (e){
             res.status(400).send(e);
         }finally {
             connection.release();

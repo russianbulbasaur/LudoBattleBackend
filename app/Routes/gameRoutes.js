@@ -11,6 +11,7 @@ const multerEngine = multer({dest:"uploads/screenshots"});
 gameRouter.use(jwtVerify);
 gameRouter.post("/create",controller.createGame);
 gameRouter.delete("/delete",controller.deleteGame);
+gameRouter.get("/status",controller.getGameStatus);
 gameRouter.patch("/accept",controller.acceptGame);
 gameRouter.patch("/send-code",controller.sendGameCode);
 gameRouter.patch("/submit",multerEngine.single("screenshot"),controller.submitResults);
