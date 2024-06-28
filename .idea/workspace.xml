@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a310050b-ae1b-42c9-86ed-f088c0ee622b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/auth/authController.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/auth/authController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/auth/firebaseAuth.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/auth/firebaseAuth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/init.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/init.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/user/userController.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/user/userController.js" afterDir="false" />
-    </list>
+    <list default="true" id="a310050b-ae1b-42c9-86ed-f088c0ee622b" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -92,7 +84,7 @@
       <workItem from="1719356133804" duration="944000" />
       <workItem from="1719369929649" duration="10834000" />
       <workItem from="1719441723087" duration="2776000" />
-      <workItem from="1719518568075" duration="5673000" />
+      <workItem from="1719518568075" duration="5919000" />
     </task>
     <servers />
   </component>

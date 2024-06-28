@@ -22,6 +22,13 @@ export class GameController{
                 res.status(404).send(JSON.stringify({"message":"Not enough balance"}));
                 return;
             }
+            [rows,fields] = await connection.query(
+                `select count(*) as games from games where host_id=? and (status=? or status=? or status=?)`,
+                [user.id,"open","playing","waiting"]);
+            const gameCount = rows[0]["games"];
+            if(gameCount>0){
+                res.status(400).send(JSON.stringify({"message":"A game already exists"}));
+            }
             await connection.query(`update users set balance=? where id=?`,
                 [userBalance-amount,user.id]);
             [rows,fields] =
